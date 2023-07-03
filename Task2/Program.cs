@@ -7,15 +7,17 @@
 i = 1, j = 2 -> 2
 i = 4, j = 2 -> такого элемента не существует*/
 
+Console.WriteLine("Введите позицию i: ");
+int i = int.Parse(Console.ReadLine()!);
 
-Console.Write("Введите количество сторок: ");
-int rows = int.Parse(Console.ReadLine()!);
 
-Console.Write("Введите количество столбцов: ");
-int columns = int.Parse(Console.ReadLine()!);
+Console.WriteLine("Введите позицию j: ");
+int j = int.Parse(Console.ReadLine()!);
 
-int[,] array = GetArray(rows, columns, 0, 10);
+
+int[,] array = GetArray(4, 4, 0, 10);
 PrintArray(array);
+PrintElementArray(i, j);
 
 int[,] GetArray(int m, int n, int MinValue, int MaxValue)
 {
@@ -26,18 +28,31 @@ int[,] GetArray(int m, int n, int MinValue, int MaxValue)
         {
             result[i, j] = new Random().Next(MinValue, MaxValue);
         }
-        return result;
-    };
+    }
+    return result;
 }
-int PrintArray(int[,] inArray)
+void PrintArray(int[,] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
         for (int j = 0; j < inArray.GetLength(1); j++)
         {
-            Console.Write($"{inArray[i, j]}");
+            Console.Write($"{inArray[i, j]} ");
         }
         Console.WriteLine();
     }
-    return inArray;
+}
+void PrintElementArray(int i, int j)
+{
+    if (i < 1 || j < 1)
+    {
+        Console.WriteLine("Такого элемента не существует");
+        return;
+    }
+    if (i > array.GetLength(0) || j > array.GetLength(1))
+    {
+        Console.WriteLine("Такого элемента не существует");
+        return;
+    }
+    Console.WriteLine($"{array[i - 1, j - 1]}");
 }
